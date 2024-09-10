@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BlogPostInterface } from './BlogPost';
 import BlogPostPreview from './BlogPostPreview';
+import { formatDateTime } from '../utils/helperFunctions';
 
 export default function BlogPosts() {
 	const [blogPosts, setBlogPosts] = useState<BlogPostInterface[]>([]);
@@ -18,14 +19,7 @@ export default function BlogPosts() {
 	return (
 		<div>
 			{blogPosts.map((blogPost, i) => {
-				const LocaleDateStringOptions: Intl.DateTimeFormatOptions = {
-					month: 'long',
-					day: 'numeric',
-					year: 'numeric',
-				};
-				blogPost.created_at = new Date(
-					blogPost.created_at
-				).toLocaleDateString('en-us', LocaleDateStringOptions);
+				blogPost.created_at = formatDateTime(blogPost.created_at);
 
 				return (
 					<BlogPostPreview

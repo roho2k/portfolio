@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import MarkdownRenderer from './MarkdownRenderer';
+import { formatDateTime } from '../utils/helperFunctions';
+import BlogPostBanner from './BlogPostBanner';
 
 export interface BlogPostInterface {
 	title: string;
@@ -11,6 +15,49 @@ export interface BlogPostInterface {
 
 export default function BlogPost() {
 	const { blogTitle } = useParams();
+	const [blogPost, setBlogPost] = useState<BlogPostInterface>();
 
-	return <div>{blogTitle}</div>;
+	const fetchBlogPost = async () => {
+		const a = blogTitle?.replaceAll('-', ' ');
+		const response = await fetch(`http://localhost:3000/api/blogs/${a}`);
+		const data: BlogPostInterface = await response.json();
+
+		setBlogPost(data);
+	};
+
+	useEffect(() => {
+		fetchBlogPost();
+	}, []);
+
+	// features to add: views, time to read, author, date, default image banner
+	if (!blogPost) {
+		return <></>;
+	}
+
+	return (
+		<div className='mx-auto p-12 bg-slate-50'>
+			<div>
+				{/* once i have a summary of who i am, i can add hover link */}
+				<span className='text-violet-300 font-semibold'>
+					{blogPost?.author}
+				</span>
+
+				<span className='text-slate-400 text-sm'>
+					{' '}
+					published on{' '}
+					{blogPost?.created_at
+						? formatDateTime(blogPost.created_at)
+						: ''}
+				</span>
+			</div>
+			<h1 className='text-4xl font-bold mb-8'>{blogPost?.title}</h1>
+			<BlogPostBanner
+				src={blogPost?.blog_image_url ? blogPost.blog_image_url : ''}
+				alt='blog-post-featured-image'
+			/>
+			<div className='prose max-w-[80ch] my-12 p-12'>
+				<MarkdownRenderer content={blogPost ? blogPost.content : ''} />
+			</div>
+		</div>
+	);
 }

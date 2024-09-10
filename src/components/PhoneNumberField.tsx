@@ -1,71 +1,61 @@
 import { useState } from 'react';
+import { formatPhoneNumber } from '../utils/helperFunctions';
 
 export default function PhoneNumberField() {
-	// to parse input for a phone number we need a regex that looks at the input
-	// then we need to replace all input that is not a number with an empty string
-	// we also need to check the cleaned string for its length
-	// if its greater than x length we need to add parenthesis, space, hyphen,
-
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+		const formattedPhoneNumber = formatPhoneNumber(
+			e.target.value,
+			phoneNumber
+		);
 		setPhoneNumber(formattedPhoneNumber);
 	};
 
-	const formatPhoneNumber = (input: string) => {
-		const text = input;
-		const previousText = phoneNumber;
-		const maxPhoneNumberLength = 10;
-
-		if (!text) {
-			return text;
+	const handleInputChangePartOne = (
+		e: React.ChangeEvent<HTMLInputElement>
+	) => {
+		const input = e.target.value;
+		const isDeleting = phoneNumber && phoneNumber.length > input.length;
+		if (isDeleting) {
+			setPhoneNumber(input);
+			return;
 		}
 
-		const deleting = previousText && previousText.length > text.length;
-		if (deleting) {
-			return text;
-		}
+		const parsedInput = input.replace(/\D/g, '');
+		const maxLength = 10;
 
-		const cleanedText = text.replace(/\D/g, '');
-
-		if (cleanedText.length >= maxPhoneNumberLength) {
-			return (
+		let formattedPhoneNumber = parsedInput;
+		if (parsedInput.length >= maxLength) {
+			formattedPhoneNumber =
 				'(' +
-				cleanedText.slice(0, 3) +
-				')' +
-				cleanedText.slice(3, 6) +
+				parsedInput.slice(0, 3) +
+				') ' +
+				parsedInput.slice(3, 6) +
 				'-' +
-				cleanedText.slice(6, maxPhoneNumberLength)
-			);
-		}
-
-		if (
-			cleanedText.length >= 6 &&
-			cleanedText.length < maxPhoneNumberLength
-		) {
-			return (
+				parsedInput.slice(6, maxLength);
+		} else if (parsedInput.length >= 6 && parsedInput.length < maxLength) {
+			formattedPhoneNumber =
 				'(' +
-				cleanedText.slice(0, 3) +
-				')' +
-				cleanedText.slice(3, 6) +
+				parsedInput.slice(0, 3) +
+				') ' +
+				parsedInput.slice(3, 6) +
 				'-' +
-				cleanedText.slice(6)
-			);
+				parsedInput.slice(6);
+		} else if (parsedInput.length >= 3 && parsedInput.length < 6) {
+			formattedPhoneNumber =
+				'(' + parsedInput.slice(0, 3) + ') ' + parsedInput.slice(3);
 		}
-
-		if (cleanedText.length >= 3 && cleanedText.length < 6) {
-			return '(' + cleanedText.slice(0, 3) + ')' + cleanedText.slice(3);
-		}
-
-		return cleanedText;
+		setPhoneNumber(formattedPhoneNumber);
+		return;
 	};
 
 	return (
-		<div>
-			<h1>Phone Number</h1>
+		<div className='flex flex-col items-center p-48 rounded-lg border-2'>
+			<h1 className='text-4xl font-bold'>Phone Number</h1>
 			<input
+				className='border-2 rounded w-60 text-xl font-semibold text-center'
 				type='text'
-				onChange={handleInputChange}
+				onChange={handleInputChangePartOne}
 				value={phoneNumber}
 			/>
 		</div>

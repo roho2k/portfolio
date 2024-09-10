@@ -95,7 +95,24 @@ export default {
 				'"dm-sans"': ['DM Sans', ...defaultTheme.fontFamily.sans],
 				'nunito-sans': ['Nunito Sans', ...defaultTheme.fontFamily.sans],
 			},
+			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+						// Custom styles for inline `code`
+						'code::before': { content: 'none' }, // Remove opening backtick
+						'code::after': { content: 'none' }, // Remove closing backtick
+						code: {
+							backgroundColor: theme('colors.slate.200'),
+							borderRadius: theme('borderRadius.DEFAULT'),
+							paddingLeft: theme('spacing[1.5]'),
+							paddingRight: theme('spacing[1.5]'),
+							paddingTop: theme('spacing.1'),
+							paddingBottom: theme('spacing.1'),
+						},
+					},
+				},
+			}),
 		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/typography')],
 };

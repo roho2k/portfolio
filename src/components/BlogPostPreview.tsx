@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BlogPostInterface } from './BlogPost';
+import { createSlug } from '../utils/helperFunctions';
+import BlogPostBanner from './BlogPostBanner';
 
 export interface BlogPostPreviewInterface extends BlogPostInterface {
 	altDescription: string;
@@ -12,22 +14,35 @@ export default function BlogPostPreview({
 	created_at,
 	content_preview,
 }: BlogPostPreviewInterface) {
+	const slug = createSlug(title);
+	const blogPostUrl = `/blog/${slug}`;
+
 	return (
 		<div className='flex flex-col justify-center'>
 			{/* should be a link to actual post with slight enlarge and unlarge */}
 			{/* image shouldnt drag */}
-			<div className=''>
-				<img
-					className='h-52 w-full object-cover'
+
+			<Link to={blogPostUrl}>
+				<BlogPostBanner
+					className='transition duration-200 hover:scale-105 cursor-pointer'
 					src={blog_image_url}
 					alt='featured-image'
 				/>
-			</div>
+			</Link>
+
 			<div>
 				{/* should be a link to actual post with highlight */}
-				<h1 className='font-bold text-xl'>{title}</h1>
+				<Link to={blogPostUrl}>
+					<h1 className='font-bold text-3xl hover:opacity-65'>
+						{title}
+					</h1>
+				</Link>
+
 				<div>
-					<span className='text-violet-400'>{author}</span>
+					{/* once i have a summary of who i am, i can add hover link */}
+					<span className='text-violet-300 font-semibold text-lg'>
+						{author}
+					</span>
 
 					<span className='text-slate-400 text-sm'>
 						{' '}
@@ -36,8 +51,10 @@ export default function BlogPostPreview({
 				</div>
 				<div>{content_preview}</div>
 				{/* should be a link to actual post with highlight */}
-				<Link to={`/blog/${title.toLowerCase().replaceAll(' ', '-')}`}>
-					Read More...
+				<Link to={blogPostUrl}>
+					<span className='text-violet-300 hover:text-violet-600 hover:underline text-sm font-semibold'>
+						Read More...
+					</span>
 				</Link>
 			</div>
 		</div>

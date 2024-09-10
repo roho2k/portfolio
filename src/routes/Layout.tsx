@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 
 // bg space-bright 300
 // bg-content bg-slate-800
@@ -8,9 +8,10 @@ import NavBar from './NavBar';
 
 export default function Layout() {
 	return (
-		<div className=''>
+		<div className='flex flex-col h-screen'>
 			<NavBar />
-			<main>
+
+			<main className='flex flex-auto bg-slate-100'>
 				<Outlet />
 			</main>
 		</div>

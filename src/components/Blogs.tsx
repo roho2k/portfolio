@@ -27,6 +27,7 @@ export default function Blogs() {
 	const page = searchParams.get('page') || 1;
 
 	const { data: blogPosts, totalPages, currentPage } = blogs;
+	blogPosts.sort((a, b) => parseInt(b.id) - parseInt(a.id));
 
 	const fetchBlogPosts = async (page: string | number) => {
 		try {

@@ -30,7 +30,7 @@ export default function BlogPostPreview({
 				/>
 			</Link>
 
-			<div className='mt-6'>
+			<div className='my-6'>
 				{/* should be a link to actual post with highlight */}
 				<Link to={blogPostUrl}>
 					<h1 className='font-bold text-3xl hover:opacity-65 mb-3'>

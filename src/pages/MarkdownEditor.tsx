@@ -9,7 +9,7 @@ export default function MarkdownEditor() {
 	const debounceChangeHandler = useCallback(
 		_.debounce((value: string) => {
 			setDebounceTextAreaInput(value);
-		}, 1000),
+		}, 500),
 		[]
 	);
 

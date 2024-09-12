@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import MarkdownRenderer from './MarkdownRenderer';
 import { formatDateTime } from '../utils/helperFunctions';
 import BlogPostBanner from './BlogPostBanner';
+import { DiscussionEmbed } from 'disqus-react';
 
 export interface BlogPostInterface {
+	id: string;
 	title: string;
 	author: string;
 	content: string;
@@ -18,8 +20,10 @@ export default function BlogPost() {
 	const [blogPost, setBlogPost] = useState<BlogPostInterface>();
 
 	const fetchBlogPost = async () => {
-		const a = blogTitle?.replaceAll('-', ' ');
-		const response = await fetch(`http://localhost:3000/api/blogs/${a}`);
+		const titleUrl = blogTitle?.replaceAll('-', ' ');
+		const response = await fetch(
+			`http://localhost:3000/api/blogs/${titleUrl}`
+		);
 		const data: BlogPostInterface = await response.json();
 
 		setBlogPost(data);
@@ -35,7 +39,7 @@ export default function BlogPost() {
 	}
 
 	return (
-		<div className='mx-auto p-12 bg-slate-50'>
+		<div className='mx-auto max-w-[80ch] w-full p-12 bg-slate-50'>
 			<div>
 				{/* once i have a summary of who i am, i can add hover link */}
 				<span className='text-violet-300 font-semibold'>
@@ -55,8 +59,23 @@ export default function BlogPost() {
 				src={blogPost?.blog_image_url ? blogPost.blog_image_url : ''}
 				alt='blog-post-featured-image'
 			/>
-			<div className='prose max-w-[80ch] my-12 p-12'>
-				<MarkdownRenderer content={blogPost ? blogPost.content : ''} />
+			<div className='flex justify-center w-full my-12 p-12'>
+				<div className='prose'>
+					<MarkdownRenderer
+						content={blogPost ? blogPost.content : ''}
+					/>
+				</div>
+			</div>
+
+			<div>
+				<DiscussionEmbed
+					shortname='rodney-ho'
+					config={{
+						url: `http://localhost:5173/blog/${blogTitle}`,
+						identifier: blogPost.id,
+						title: blogTitle,
+					}}
+				/>
 			</div>
 		</div>
 	);

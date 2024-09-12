@@ -1,24 +1,35 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import _ from 'lodash';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 
 export default function MarkdownEditor() {
-	const [textareaInput, setTextAreaInput] = useState('');
+	const [textAreaInput, setTextAreaInput] = useState('');
+	const [debouncedTextAreaInput, setDebounceTextAreaInput] = useState('');
+
+	const debounceChangeHandler = useCallback(
+		_.debounce((value: string) => {
+			setDebounceTextAreaInput(value);
+		}, 1000),
+		[]
+	);
 
 	const handleTextAreaOnChange = (
 		e: React.ChangeEvent<HTMLTextAreaElement>
 	) => {
-		setTextAreaInput(e.target.value);
+		const value = e.target.value;
+		setTextAreaInput(value);
+		debounceChangeHandler(value);
 	};
 
 	return (
 		<div className='flex flex-auto'>
 			<textarea
 				className='flex-auto max-w-[50%] p-5 border'
-				value={textareaInput}
+				value={textAreaInput}
 				onChange={handleTextAreaOnChange}
 			/>
 			<div className='prose flex-auto max-w-[50%] p-5 border'>
-				<MarkdownRenderer content={textareaInput} />
+				<MarkdownRenderer content={debouncedTextAreaInput} />
 			</div>
 		</div>
 	);

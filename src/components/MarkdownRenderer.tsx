@@ -2,12 +2,13 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { memo } from 'react';
 
 export interface MarkdownRendererInterface {
 	content: string;
 }
 
-export default function MarkdownRenderer({
+export default memo(function MarkdownRenderer({
 	content,
 }: MarkdownRendererInterface) {
 	return (
@@ -39,4 +40,4 @@ export default function MarkdownRenderer({
 			}}
 		/>
 	);
-}
+});

@@ -40,7 +40,7 @@ export default function BlogPostPreview({
 
 				<div className='mb-1'>
 					{/* once i have a summary of who i am, i can add hover link */}
-					<span className='text-violet-300 font-semibold text-lg'>
+					<span className='text-violet-500 font-semibold text-lg'>
 						{author}
 					</span>
 
@@ -52,7 +52,7 @@ export default function BlogPostPreview({
 				<div className='mb-1'>{content_preview}</div>
 				{/* should be a link to actual post with highlight */}
 				<Link to={blogPostUrl}>
-					<span className='text-violet-300 hover:text-violet-600 hover:underline text-sm font-semibold'>
+					<span className='text-violet-500 hover:text-violet-300 hover:underline text-sm font-semibold'>
 						Read More...
 					</span>
 				</Link>

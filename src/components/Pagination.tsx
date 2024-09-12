@@ -20,8 +20,8 @@ export default function Pagination({
 					<button
 						className={classNames(
 							isCurrentPage &&
-								'text-violet-400 border-b-2 border-violet-400',
-							'font-bold px-1'
+								'text-violet-500 border-b-2 border-violet-500 hover:border-violet-300',
+							'font-bold px-1 hover:text-violet-300'
 						)}
 						key={pageNumber}
 						onClick={() => handlePagination(pageNumber)}

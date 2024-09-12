@@ -6,24 +6,24 @@ import Pagination from './Pagination';
 import { useSearchParams } from 'react-router-dom';
 import ErrorComponent from './ErrorComponent';
 
-export interface BlogsInterface {
+export interface BlogListInterface {
 	data: BlogPostInterface[];
 	currentPage: string;
 	totalPages: string;
 	totalItems: string;
 }
 
-const defaultBlogs: BlogsInterface = {
+const defaultBlogs: BlogListInterface = {
 	data: [],
 	currentPage: '',
 	totalPages: '',
 	totalItems: '',
 };
 
-export default function Blogs() {
+export default function BlogList() {
 	const [error, setError] = useState<Error | null>(null);
 	const [searchParams, setSearchParams] = useSearchParams();
-	const [blogs, setBlogs] = useState<BlogsInterface>(defaultBlogs);
+	const [blogs, setBlogs] = useState<BlogListInterface>(defaultBlogs);
 	const page = searchParams.get('page') || 1;
 
 	const { data: blogPosts, totalPages, currentPage } = blogs;
@@ -38,7 +38,7 @@ export default function Blogs() {
 			if (response.status === 404) {
 				throw new Error('A 404 error occurred when fetching blogs.');
 			}
-			const data: BlogsInterface = await response.json();
+			const data: BlogListInterface = await response.json();
 			setBlogs(data);
 		} catch (error) {
 			if (error instanceof Error) {

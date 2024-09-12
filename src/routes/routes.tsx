@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
-import Home from '../pages/Home';
+import Blogs from '../pages/Blogs';
 import BlogPost from '../components/BlogPost';
 import MarkdownEditor from '../pages/MarkdownEditor';
 import Component from '../pages/Component';
 import PhoneNumberField from '../components/PhoneNumberField';
+import About from '../pages/About';
 
 const router = createBrowserRouter([
 	{
@@ -12,7 +13,11 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Home />,
+				element: <Blogs />,
+			},
+			{
+				path: '/about',
+				element: <About />,
 			},
 			{
 				path: '/markdown-editor',

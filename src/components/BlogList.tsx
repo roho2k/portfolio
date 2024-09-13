@@ -36,10 +36,8 @@ export default function BlogList() {
 			// );
 
 			const response = await fetch(
-				`https://portfolio-server-zeta-six.vercel.app/api/blogs/?page=${page}&limt=10`
+				`https://www.rodneyho.com/api/blogs/?page=${page}&limt=10`
 			);
-
-			console.log(response);
 
 			if (response.status === 404) {
 				throw new Error('A 404 error occurred when fetching blogs.');

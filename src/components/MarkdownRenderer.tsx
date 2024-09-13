@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { memo } from 'react';
+import { CodeProps } from 'react-markdown/lib/ast-to-react';
 
 export interface MarkdownRendererInterface {
 	content: string;
@@ -16,17 +17,17 @@ export default memo(function MarkdownRenderer({
 			children={content}
 			remarkPlugins={[remarkGfm]}
 			components={{
-				code({ node, inline, className, children, ...props }) {
+				code({ inline, className, children, ...props }: CodeProps) {
 					const match = /language-(\w+)/.exec(className || '');
 					return !inline && match ? (
 						<SyntaxHighlighter
 							children={String(children).replace(/\n$/, '')}
-							style={oneDark}
 							language={match[1]}
 							PreTag='div'
 							showLineNumbers={true}
 							useInlineStyles={true}
 							{...props}
+							style={oneDark}
 						/>
 					) : (
 						<code

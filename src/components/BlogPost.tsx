@@ -22,7 +22,7 @@ export default function BlogPost() {
 	const fetchBlogPost = async () => {
 		const titleUrl = blogTitle?.replaceAll('-', ' ');
 		const response = await fetch(
-			`http://localhost:3000/api/blogs/${titleUrl}`
+			`https://portfolio-server-zeta-six.vercel.app/api/blogs/${titleUrl}`
 		);
 		const data: BlogPostInterface = await response.json();
 

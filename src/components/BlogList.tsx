@@ -31,9 +31,15 @@ export default function BlogList() {
 
 	const fetchBlogPosts = async (page: string | number) => {
 		try {
+			// const response = await fetch(
+			// 	`http://localhost:3000/api/blogs?page=${page}&limt=10`
+			// );
+
 			const response = await fetch(
-				`http://localhost:3000/api/blogs?page=${page}&limt=10`
+				`https://portfolio-server-zeta-six.vercel.app/api/blogs/?page=${page}&limt=10`
 			);
+
+			console.log(response);
 
 			if (response.status === 404) {
 				throw new Error('A 404 error occurred when fetching blogs.');

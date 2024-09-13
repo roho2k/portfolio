@@ -1,0 +1,8 @@
+{
+	"rewrites": [
+		{
+			"source": "/api/(.*)",
+			"destination": "https://portfolio-server-zeta-six.vercel.app/api/$1"
+		}
+	]
+}

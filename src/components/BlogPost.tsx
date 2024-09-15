@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import MarkdownRenderer from './MarkdownRenderer';
 import { formatDateTime } from '../utils/helperFunctions';
 import BlogPostBanner from './BlogPostBanner';
-import { DiscussionEmbed } from 'disqus-react';
+// import { DiscussionEmbed } from 'disqus-react';
 
 export interface BlogPostInterface {
 	id: string;

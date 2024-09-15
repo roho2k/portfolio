@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import MarkdownRenderer from './MarkdownRenderer';
 import { formatDateTime } from '../utils/helperFunctions';
 import BlogPostBanner from './BlogPostBanner';
-import { DiscussionEmbed } from 'disqus-react';
 import { API_BASE_URL } from '../api/fetchConfig';
+import Disqus from './Disqus';
 
 export interface BlogPostInterface {
-	id: string;
+	id: number;
 	title: string;
 	author: string;
 	content: string;
@@ -29,7 +29,6 @@ export default function BlogPost() {
 	};
 
 	useEffect(() => {
-		console.log('abc');
 		fetchBlogPost();
 	}, []);
 
@@ -68,13 +67,10 @@ export default function BlogPost() {
 			</div>
 
 			<div>
-				<DiscussionEmbed
-					shortname='rodney-ho'
-					config={{
-						url: `http://localhost:5173/blog/${blogTitle}`,
-						identifier: blogPost.id,
-						title: blogTitle,
-					}}
+				<Disqus
+					url={window.location.origin + window.location.pathname}
+					identifier={blogPost.id.toString()}
+					title={blogTitle}
 				/>
 			</div>
 		</div>

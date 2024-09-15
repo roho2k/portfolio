@@ -28,16 +28,10 @@ export default function BlogList() {
 	const page = searchParams.get('page') || 1;
 
 	const { data: blogPosts, totalPages, currentPage } = blogs;
-	blogPosts.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+	blogPosts.sort((a, b) => b.id - a.id);
 
 	const fetchBlogPosts = async (page: string | number) => {
 		try {
-			// const response = await fetch(
-			// 	`http://localhost:3000/api/blogs?page=${page}&limt=10`
-			// );
-
-			console.log(import.meta.env.VITE_API_BASE_URL);
-
 			const response = await fetch(
 				`${API_BASE_URL}/blogs/?page=${page}&limt=10`
 			);

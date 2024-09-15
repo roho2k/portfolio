@@ -22,7 +22,7 @@ export default function BlogPost() {
 	const fetchBlogPost = async () => {
 		const titleUrl = blogTitle?.replaceAll('-', ' ');
 		const response = await fetch(
-			`https://www.rodneyho.com/blogs/${titleUrl}`
+			`https://www.rodneyho.com/api/blogs/${titleUrl}`
 		);
 		const data: BlogPostInterface = await response.json();
 

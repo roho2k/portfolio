@@ -30,6 +30,7 @@ export default function BlogPost() {
 	};
 
 	useEffect(() => {
+		console.log('abc');
 		fetchBlogPost();
 	}, []);
 

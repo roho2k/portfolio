@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import MarkdownRenderer from './MarkdownRenderer';
 import { formatDateTime } from '../utils/helperFunctions';
 import BlogPostBanner from './BlogPostBanner';
-// import { DiscussionEmbed } from 'disqus-react';
+import { DiscussionEmbed } from 'disqus-react';
 
 export interface BlogPostInterface {
 	id: string;
@@ -22,7 +22,7 @@ export default function BlogPost() {
 	const fetchBlogPost = async () => {
 		const titleUrl = blogTitle?.replaceAll('-', ' ');
 		const response = await fetch(
-			`https://www.rodneyho.com/api/blogs/api/blogs/${titleUrl}`
+			`https://www.rodneyho.com/blogs/${titleUrl}`
 		);
 		const data: BlogPostInterface = await response.json();
 
@@ -68,14 +68,14 @@ export default function BlogPost() {
 			</div>
 
 			<div>
-				{/* <DiscussionEmbed
+				<DiscussionEmbed
 					shortname='rodney-ho'
 					config={{
 						url: `http://localhost:5173/blog/${blogTitle}`,
 						identifier: blogPost.id,
 						title: blogTitle,
 					}}
-				/> */}
+				/>
 			</div>
 		</div>
 	);

@@ -4,6 +4,7 @@ import MarkdownRenderer from './MarkdownRenderer';
 import { formatDateTime } from '../utils/helperFunctions';
 import BlogPostBanner from './BlogPostBanner';
 import { DiscussionEmbed } from 'disqus-react';
+import { API_BASE_URL } from '../api/fetchConfig';
 
 export interface BlogPostInterface {
 	id: string;
@@ -20,10 +21,8 @@ export default function BlogPost() {
 	const [blogPost, setBlogPost] = useState<BlogPostInterface>();
 
 	const fetchBlogPost = async () => {
-		const titleUrl = blogTitle?.replaceAll('-', ' ');
-		const response = await fetch(
-			`https://www.rodneyho.com/api/blogs/${titleUrl}`
-		);
+		const titleUrl = '/' + blogTitle?.replaceAll('-', ' ');
+		const response = await fetch(`${API_BASE_URL}/blogs${titleUrl}`);
 		const data: BlogPostInterface = await response.json();
 
 		setBlogPost(data);

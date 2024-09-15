@@ -5,6 +5,7 @@ import { formatDateTime } from '../utils/helperFunctions';
 import Pagination from './Pagination';
 import { useSearchParams } from 'react-router-dom';
 import ErrorComponent from './ErrorComponent';
+import { API_BASE_URL } from '../api/fetchConfig';
 
 export interface BlogListInterface {
 	data: BlogPostInterface[];
@@ -35,8 +36,10 @@ export default function BlogList() {
 			// 	`http://localhost:3000/api/blogs?page=${page}&limt=10`
 			// );
 
+			console.log(import.meta.env.VITE_API_BASE_URL);
+
 			const response = await fetch(
-				`https://www.rodneyho.com/api/blogs/?page=${page}&limt=10`
+				`${API_BASE_URL}/blogs/?page=${page}&limt=10`
 			);
 
 			if (response.status === 404) {

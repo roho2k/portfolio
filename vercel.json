@@ -4,6 +4,6 @@
 			"source": "/api/(.*)",
 			"destination": "https://portfolio-server-zeta-six.vercel.app/api/$1"
 		},
-		{ "source": "/[^.]+", "destination": "/" }
+		{ "source": "/(.*)", "destination": "/index.html" }
 	]
 }

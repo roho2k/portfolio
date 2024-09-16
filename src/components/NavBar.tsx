@@ -26,7 +26,7 @@ export default function NavBar() {
 						Blogs
 					</NavLink>
 					<NavLink
-						to='/troll'
+						to='/about'
 						className={({ isActive }) =>
 							classNames(
 								{

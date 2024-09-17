@@ -5,6 +5,8 @@ import { formatDateTime } from '../utils/helperFunctions';
 import BlogPostBanner from './BlogPostBanner';
 import { API_BASE_URL } from '../api/fetchConfig';
 import Disqus from './Disqus';
+import classNames from 'classnames';
+import BackgroundContainer from './BackgroundContainer';
 
 export interface BlogPostInterface {
 	id: number;
@@ -38,7 +40,7 @@ export default function BlogPost() {
 	}
 
 	return (
-		<div className='mx-auto max-w-[80ch] w-full p-12 bg-slate-50'>
+		<BackgroundContainer>
 			<div>
 				{/* once i have a summary of who i am, i can add hover link */}
 				<span className='text-violet-300 font-semibold'>
@@ -58,8 +60,8 @@ export default function BlogPost() {
 				src={blogPost?.blog_image_url ? blogPost.blog_image_url : ''}
 				alt='blog-post-featured-image'
 			/>
-			<div className='flex justify-center w-full my-12 p-12'>
-				<div className='prose'>
+			<div className={classNames(['flex justify-center mt-6 mb-12'])}>
+				<div className='prose max-w-full'>
 					<MarkdownRenderer
 						content={blogPost ? blogPost.content : ''}
 					/>
@@ -73,6 +75,6 @@ export default function BlogPost() {
 					title={blogTitle}
 				/>
 			</div>
-		</div>
+		</BackgroundContainer>
 	);
 }

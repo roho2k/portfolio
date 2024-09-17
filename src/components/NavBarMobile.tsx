@@ -25,7 +25,7 @@ export default function NavBarMobile({ className }: NavBarMobileInterface) {
 				<Link to='/'>
 					<h2
 						className='font-bold text-3xl hover-hover:text-violet-300'
-						onClick={() => handleIsOpen(!isOpen)}
+						onClick={() => handleIsOpen(false)}
 					>
 						Rodney Ho
 					</h2>

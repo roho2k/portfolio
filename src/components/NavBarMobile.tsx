@@ -23,7 +23,10 @@ export default function NavBarMobile({ className }: NavBarMobileInterface) {
 		>
 			<div className='flex text-space-blue-300 max-w-7xl mx-auto p-6 font-semibold items-center'>
 				<Link to='/'>
-					<h2 className='font-bold text-3xl hover:text-violet-300'>
+					<h2
+						className='font-bold text-3xl hover-hover:text-violet-300'
+						onClick={() => handleIsOpen(!isOpen)}
+					>
 						Rodney Ho
 					</h2>
 				</Link>

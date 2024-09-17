@@ -5,6 +5,9 @@ export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
+			screens: {
+				'hover-hover': { raw: '(hover: hover)' },
+			},
 			colors: {
 				space: {
 					50: '#e7e7e8',

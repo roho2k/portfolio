@@ -1,6 +1,7 @@
 import BackgroundContainer from '../components/BackgroundContainer';
 import GithubIcon from '../assets/icons/github-icon.svg?react';
 import LinkedInIcon from '../assets/icons/linkedin-icon.svg?react';
+import classNames from 'classnames';
 
 export default function About() {
 	return (
@@ -21,7 +22,12 @@ export default function About() {
 						</h3>
 					</div>
 				</section>
-				<section className='prose mx-20 mt-14 mb-10'>
+				<section
+					className={classNames(
+						['prose my-8'],
+						['lg:mx-20 lg:mt-14 lg:mb-10']
+					)}
+				>
 					<p>
 						Hello! I'm Rodney. I'm a passionate Software Engineer
 						with 5 years of experience building dynamic, responsive,

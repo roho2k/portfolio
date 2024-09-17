@@ -10,6 +10,10 @@ export interface NavBarMobileInterface {
 
 export default function NavBarMobile({ className }: NavBarMobileInterface) {
 	const [isOpen, setOpen] = useState(false);
+	const handleIsOpen = (status: boolean) => {
+		setOpen(status);
+	};
+
 	return (
 		<nav
 			className={classNames(
@@ -37,6 +41,7 @@ export default function NavBarMobile({ className }: NavBarMobileInterface) {
 					{ hidden: !isOpen },
 					'fixed w-full bg-white border-t-2'
 				)}
+				onClick={() => handleIsOpen(!isOpen)}
 			>
 				<Link to='/'>
 					<div className='flex justify-center items-center py-4'>
@@ -50,7 +55,10 @@ export default function NavBarMobile({ className }: NavBarMobileInterface) {
 				</Link>
 			</div>
 
-			<Mask isOpen={isOpen} />
+			<Mask
+				isOpen={isOpen}
+				setOpen={handleIsOpen}
+			/>
 		</nav>
 	);
 }

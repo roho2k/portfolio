@@ -11,7 +11,7 @@ export default function About() {
 					<div className='flex justify-center'>
 						<img
 							className='rounded-full h-48'
-							src='https://mlwfrbilrjnxdjvduhxp.supabase.co/storage/v1/object/public/portfolio-blog-post-bucket/profile-picture.jpg'
+							src='https://mlwfrbilrjnxdjvduhxp.supabase.co/storage/v1/object/public/portfolio-blog-post-bucket/profile-picture-v2.webp'
 							alt='profile-picture'
 						/>
 					</div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BlogPostInterface } from './BlogPost';
 import BlogPostPreview from './BlogPostPreview';
-import { formatDateTime } from '../utils/helperFunctions';
+import { formatDateTime, preLoadImage } from '../utils/helperFunctions';
 import Pagination from './Pagination';
 import { useSearchParams } from 'react-router-dom';
 import ErrorComponent from './ErrorComponent';
@@ -81,6 +81,7 @@ export default function BlogList() {
 			<div className='flex-auto'>
 				{blogPosts.map((blogPost, i) => {
 					blogPost.created_at = formatDateTime(blogPost.created_at);
+					preLoadImage(blogPost.blog_image_url);
 
 					return (
 						<BlogPostPreview

@@ -65,6 +65,7 @@ export function preLoadImage(url: string) {
 	return new Promise<void>((resolve) => {
 		const img = new Image();
 		img.src = url;
+		img.fetchPriority = 'high';
 		img.onload = () => resolve();
 	});
 }
